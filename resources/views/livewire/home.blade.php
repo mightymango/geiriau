@@ -1,7 +1,7 @@
 <div class="space-y-6">
     <header>
         <p class="text-sm text-stone-500">{{ now(config('cymraeg.timezone'))->locale('cy')->translatedFormat('l j F') }}</p>
-        <h1 class="text-3xl font-bold tracking-tight">Shwmae, Simon!</h1>
+        <h1 class="text-3xl font-bold tracking-tight">Shwmae{{ $name ? ", {$name}" : '' }}!</h1>
     </header>
 
     <section class="grid grid-cols-3 gap-3 text-center">
@@ -54,6 +54,13 @@
     @else
         <div class="rounded-2xl bg-emerald-50 p-4 text-center text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
             Da iawn! Nothing due right now.
+
+            @if ($canLearnMore)
+                <button wire:click="learnMore" wire:loading.attr="disabled"
+                        class="mt-3 block w-full rounded-xl bg-emerald-700 py-3 font-semibold text-white active:bg-emerald-800 dark:bg-emerald-600">
+                    Mwy o eiriau · {{ $newPerDay }} more words
+                </button>
+            @endif
         </div>
     @endif
 

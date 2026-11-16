@@ -49,6 +49,13 @@ class Study extends Component
         $this->loadNext($planner);
     }
 
+    public function learnMore(StudyPlanner $planner)
+    {
+        $planner->learnMore();
+
+        return $this->redirectRoute('learn', navigate: true);
+    }
+
     private function loadNext(StudyPlanner $planner): void
     {
         $this->cardId = $planner->nextCard()?->id;
@@ -99,6 +106,8 @@ class Study extends Component
             'previews' => $card && $this->revealed ? $planner->preview($card) : [],
             'grades' => Grade::cases(),
             'remaining' => $planner->stats()['due'],
+            'canLearnMore' => ! $card && $planner->canLearnMore(),
+            'newPerDay' => $planner->newPerDay(),
         ]);
     }
 }

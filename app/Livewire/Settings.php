@@ -11,6 +11,8 @@ use Livewire\Component;
 #[Layout('layouts.app')]
 class Settings extends Component
 {
+    public string $name = '';
+
     public int $newPerDay = 5;
 
     public string $mynediadMode = StudyPlanner::MYNEDIAD_REVIEW;
@@ -27,6 +29,7 @@ class Settings extends Component
 
     public function mount(StudyPlanner $planner, DailyReminders $reminders): void
     {
+        $this->name = (string) Setting::read('name', '');
         $this->reminderEnabled = $reminders->enabled();
         $this->reminderTime = $reminders->time();
         $this->onboarded = $planner->isOnboarded();
@@ -40,7 +43,10 @@ class Settings extends Component
             'newPerDay' => 'required|integer|min:1|max:20',
             'mynediadMode' => 'required|in:review,learn,off',
             'reminderTime' => ['required', 'regex:/^([01]\d|2[0-3]):[0-5]\d$/'],
+            'name' => ['nullable', 'string', 'max:40'],
         ]);
+
+        Setting::put('name', trim($this->name));
 
         if (! $this->onboarded) {
             $planner->onboard($this->mynediadMode, $this->newPerDay);

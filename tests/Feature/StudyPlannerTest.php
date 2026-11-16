@@ -1,10 +1,13 @@
 <?php
 
+use App\Livewire\Home;
+use App\Livewire\Learn;
 use App\Models\Card;
 use App\Models\Word;
 use App\Services\StudyPlanner;
 use App\Srs\Grade;
 use Carbon\CarbonImmutable;
+use Livewire\Livewire;
 
 beforeEach(function () {
     $this->travelTo(CarbonImmutable::parse('2026-11-16 10:00:00'));
@@ -68,4 +71,82 @@ it('spreads out reviews when mynediad is marked as known', function () {
 
     expect($activeCount)->toBe(Word::where('level', 'mynediad')->count() * 2)
         ->and($dueNowCount)->toBe(config('cymraeg.mynediad_per_day'));
+});
+
+function finishTodaysWords(StudyPlanner $planner): void
+{
+    $planner->todaysNewWords();
+
+    while ($card = $planner->nextCard()) {
+        $planner->answer($card, Grade::Easy);
+    }
+}
+
+it('offers more words once today\'s words are done', function () {
+    $planner = app(StudyPlanner::class);
+    $planner->onboard(StudyPlanner::MYNEDIAD_OFF, 5);
+    $planner->todaysNewWords();
+
+    expect($planner->canLearnMore())->toBeFalse();
+
+    finishTodaysWords($planner);
+
+    expect($planner->canLearnMore())->toBeTrue();
+});
+
+it('adds another batch to today\'s words on request', function () {
+    $planner = app(StudyPlanner::class);
+    $planner->onboard(StudyPlanner::MYNEDIAD_OFF, 5);
+    finishTodaysWords($planner);
+
+    $planner->learnMore();
+
+    expect($planner->todaysNewWords())->toHaveCount(10)
+        ->and($planner->nextCard()->state)->toBe('new')
+        ->and($planner->canLearnMore())->toBeFalse();
+});
+
+it('does not offer more words while reviews are piling up', function () {
+    config(['cymraeg.backlog_limit' => 0]);
+
+    $planner = app(StudyPlanner::class);
+    $planner->onboard(StudyPlanner::MYNEDIAD_REVIEW, 5);
+    finishTodaysWords($planner);
+
+    $this->travelTo(CarbonImmutable::parse('2026-11-20 10:00:00'));
+
+    expect($planner->dueReviewCount())->toBeGreaterThan(0)
+        ->and($planner->canLearnMore())->toBeFalse();
+});
+
+it('starts learning at the first word not yet seen', function () {
+    $planner = app(StudyPlanner::class);
+    $planner->onboard(StudyPlanner::MYNEDIAD_OFF, 5);
+    finishTodaysWords($planner);
+    $planner->learnMore();
+
+    Livewire::test(Learn::class)->assertSet('index', 5);
+});
+
+it('sends you to meet the extra words from home', function () {
+    $planner = app(StudyPlanner::class);
+    $planner->onboard(StudyPlanner::MYNEDIAD_OFF, 5);
+    finishTodaysWords($planner);
+
+    Livewire::test(Home::class)
+        ->assertSee('5 more words')
+        ->call('learnMore')
+        ->assertRedirect(route('learn'));
+
+    expect($planner->todaysNewWords())->toHaveCount(10);
+});
+
+it('does not offer more words before today\'s batch is picked', function () {
+    $planner = app(StudyPlanner::class);
+    $planner->onboard(StudyPlanner::MYNEDIAD_OFF, 5);
+    finishTodaysWords($planner);
+
+    $this->travelTo(CarbonImmutable::parse('2026-11-17 10:00:00'));
+
+    expect($planner->canLearnMore())->toBeFalse();
 });

@@ -15,6 +15,15 @@ class Learn extends Component
 {
     public int $index = 0;
 
+    public function mount(StudyPlanner $planner): void
+    {
+        $firstUnseen = $planner->todaysNewWords()
+            ->values()
+            ->search(fn ($word) => $word->recognise?->state === 'new');
+
+        $this->index = $firstUnseen === false ? 0 : $firstUnseen;
+    }
+
     public function next(int $total): void
     {
         $this->index = min($this->index + 1, $total - 1);

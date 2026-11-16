@@ -8,6 +8,16 @@
 
     <form wire:submit="save" class="space-y-6">
         <section class="rounded-2xl bg-white p-5 shadow-sm dark:bg-stone-900">
+            <label for="name" class="block font-semibold">Eich enw <span class="font-normal text-stone-500">· Your name</span></label>
+            <p class="mb-3 text-sm text-stone-500">Optional — used to greet you on the home screen.</p>
+            <input id="name" type="text" wire:model="name" maxlength="40" autocomplete="given-name"
+                   class="w-full select-text rounded-lg border border-stone-300 px-3 py-2 dark:border-stone-700 dark:bg-stone-950">
+            @error('name')
+                <p class="mt-2 text-sm text-rose-600">{{ $message }}</p>
+            @enderror
+        </section>
+
+        <section class="rounded-2xl bg-white p-5 shadow-sm dark:bg-stone-900">
             <h2 class="font-semibold">Mynediad words</h2>
             <p class="mb-3 text-sm text-stone-500">How should the entry-level vocabulary be handled?</p>
             @foreach ([

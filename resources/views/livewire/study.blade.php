@@ -6,7 +6,14 @@
             <p class="mt-2 text-stone-500">
                 {{ $doneThisSession > 0 ? "That's everything for now — {$doneThisSession} answered." : 'Nothing due right now.' }}
             </p>
-            <a href="{{ route('home') }}" wire:navigate class="mt-6 rounded-xl bg-stone-900 px-6 py-3 font-semibold text-white dark:bg-stone-100 dark:text-stone-900">Adref</a>
+            @if ($canLearnMore)
+                <p class="mt-6 text-sm text-stone-500">Hawdd? · Found that easy?</p>
+                <button wire:click="learnMore" wire:loading.attr="disabled"
+                        class="mt-2 rounded-xl bg-red-700 px-6 py-3 font-semibold text-white active:bg-red-800">
+                    Mwy o eiriau · {{ $newPerDay }} more words
+                </button>
+            @endif
+            <a href="{{ route('home') }}" wire:navigate class="mt-4 rounded-xl bg-stone-900 px-6 py-3 font-semibold text-white dark:bg-stone-100 dark:text-stone-900">Adref</a>
         </div>
     @else
         @php $produce = $card->direction === \App\Models\Card::PRODUCE; @endphp

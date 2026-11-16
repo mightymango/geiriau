@@ -11,6 +11,7 @@ use App\Srs\Grade;
 use App\Srs\Scheduler;
 use App\Srs\StudyDay;
 use Carbon\CarbonImmutable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -106,19 +107,55 @@ class StudyPlanner
             return;
         }
 
+        $this->introduce($this->unintroducedWords()->limit($this->newPerDay())->get(), $key);
+    }
+
+    public function canLearnMore(): bool
+    {
+        if (! $this->isOnboarded()) {
+            return false;
+        }
+
+        if (Setting::read('intro_day') !== $this->todayKey()) {
+            return false;
+        }
+
+        if ($this->newWordsHeldBack()) {
+            return false;
+        }
+
+        if ($this->dueReviewCount() > (int) config('cymraeg.backlog_limit', 80)) {
+            return false;
+        }
+
+        if (Card::query()->active()->where('state', CardState::NEW)->exists()) {
+            return false;
+        }
+
+        return $this->unintroducedWords()->exists();
+    }
+
+    public function learnMore(): void
+    {
+        if (! $this->canLearnMore()) {
+            return;
+        }
+
+        $this->introduce($this->unintroducedWords()->limit($this->newPerDay())->get(), $this->todayKey());
+    }
+
+    /** @return Builder<Word> */
+    private function unintroducedWords(): Builder
+    {
         $levels = $this->mynediadMode() === self::MYNEDIAD_LEARN
             ? ['own', 'mynediad', 'sylfaen']
             : ['own', 'sylfaen'];
 
-        $words = Word::query()
+        return Word::query()
             ->whereNull('introduced_at')
             ->whereIn('level', $levels)
             ->orderByRaw("case level when 'own' then 0 when 'mynediad' then 1 else 2 end")
-            ->orderBy('position')
-            ->limit($this->newPerDay())
-            ->get();
-
-        $this->introduce($words, $key);
+            ->orderBy('position');
     }
 
     /** Add a single word to today's batch (used when you add your own word). */
