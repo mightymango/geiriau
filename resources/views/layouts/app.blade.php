@@ -8,8 +8,6 @@
     @livewireStyles
 </head>
 <body class="bg-stone-50 text-stone-900 antialiased select-none dark:bg-stone-950 dark:text-stone-100">
-    @include('partials.launch-intro')
-
     <div class="mx-auto flex min-h-dvh max-w-md flex-col"
          style="padding-top: env(safe-area-inset-top); padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));">
         <main class="flex-1 px-5 py-6">
