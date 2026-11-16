@@ -44,7 +44,7 @@ class DailyReminders
     /** "HH:MM", local time. */
     public function time(): string
     {
-        return Setting::read('reminder_time', config('cymraeg.reminder_time', '19:00'));
+        return Setting::read('reminder_time', config('cymraeg.reminder_time', '08:00'));
     }
 
     public function configure(bool $enabled, string $time): void

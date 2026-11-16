@@ -1,10 +1,12 @@
 <?php
 
+use App\Livewire\Settings;
 use App\Services\Reminders\DailyReminders;
 use App\Services\Reminders\NotificationGateway;
 use App\Services\StudyPlanner;
 use App\Srs\Grade;
 use Carbon\CarbonImmutable;
+use Livewire\Livewire;
 
 class FakeGateway implements NotificationGateway
 {
@@ -83,4 +85,10 @@ it('starts tomorrow when the reminder time has already passed today', function (
     expect($this->gateway->scheduled)
         ->not->toHaveKey('geiriau-2026-11-16')
         ->toHaveCount(6);
+});
+
+it('defaults the reminder time to eight in the morning', function () {
+    expect(app(DailyReminders::class)->time())->toBe('08:00');
+
+    Livewire::test(Settings::class)->assertSet('reminderTime', '08:00');
 });

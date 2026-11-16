@@ -1,8 +1,9 @@
 <?php
 
-it('shows the launch intro over the page', function () {
+it('shows the splash artwork as the launch intro', function () {
     $this->get('/settings')
         ->assertOk()
         ->assertSee('id="launch-intro"', false)
-        ->assertSee('Pum gair y dydd');
+        ->assertSee('/splash.png', false)
+        ->assertSee('/splash-dark.png', false);
 });

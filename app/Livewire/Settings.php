@@ -19,7 +19,7 @@ class Settings extends Component
 
     public bool $reminderEnabled = true;
 
-    public string $reminderTime = '19:00';
+    public string $reminderTime = '08:00';
 
     public bool $confirmingReset = false;
 

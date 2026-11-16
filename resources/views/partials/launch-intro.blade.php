@@ -1,8 +1,9 @@
 <div id="launch-intro"
-     class="fixed inset-0 z-50 hidden flex-col items-center justify-center bg-stone-50 transition-opacity duration-500 motion-reduce:transition-none dark:bg-stone-950">
-    <p class="text-5xl font-bold tracking-tight text-red-700 dark:text-red-400">Geiriau</p>
-    <p class="mt-3 text-lg font-medium text-stone-700 dark:text-stone-300">Pum gair y dydd</p>
-    <p class="text-sm text-stone-500 dark:text-stone-400">Five words a day</p>
+     class="fixed inset-0 z-50 hidden bg-[#C8102E] transition-opacity duration-500 motion-reduce:transition-none dark:bg-[#15100F]">
+    <picture>
+        <source srcset="{{ asset('splash-dark.png') }}" media="(prefers-color-scheme: dark)">
+        <img src="{{ asset('splash.png') }}" alt="Geiriau — Pum gair y dydd" class="h-full w-full object-cover">
+    </picture>
 </div>
 
 <script>
@@ -19,7 +20,7 @@
             return;
         }
 
-        intro.classList.replace('hidden', 'flex');
+        intro.classList.remove('hidden');
 
         const dismiss = () => {
             intro.classList.add('opacity-0', 'pointer-events-none');

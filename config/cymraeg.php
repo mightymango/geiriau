@@ -19,7 +19,7 @@ return [
 
     // Daily reminder (changeable in Settings). Driver: "local" uses the on-device notifications
     // plugin; "log" just writes to the log (handy in a browser). Defaults to "local" when installed.
-    'reminder_time' => '19:00',
+    'reminder_time' => '08:00',
     'reminder_driver' => env('REMINDER_DRIVER'),
 
     'learning_steps' => [1, 10],

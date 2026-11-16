@@ -49,7 +49,7 @@
                            class="rounded-lg border border-stone-300 px-3 py-2 dark:border-stone-700 dark:bg-stone-950">
                 </div>
                 @error('reminderTime') <p class="mt-1 text-xs text-rose-600">{{ $message }}</p> @enderror
-                <p class="mt-2 text-xs text-stone-500">Tip: tie it to something you already do every day, e.g. just after tea.</p>
+                <p class="mt-2 text-xs text-stone-500">Tip: tie it to something you already do every day, e.g. with your morning paned.</p>
             @endif
         </section>
 
