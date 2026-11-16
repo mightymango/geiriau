@@ -1,12 +1,10 @@
 <?php
 
-use App\Livewire\Home;
 use App\Models\Card;
 use App\Models\Word;
 use App\Services\StudyPlanner;
 use App\Srs\Grade;
 use Carbon\CarbonImmutable;
-use Livewire\Livewire;
 
 beforeEach(function () {
     $this->travelTo(CarbonImmutable::parse('2026-11-16 10:00:00'));
@@ -110,19 +108,6 @@ it('does not offer more words while reviews are piling up', function () {
 
     expect($planner->dueReviewCount())->toBeGreaterThan(0)
         ->and($planner->canLearnMore())->toBeFalse();
-});
-
-it('sends you to meet the extra words from home', function () {
-    $planner = app(StudyPlanner::class);
-    $planner->onboard(StudyPlanner::MYNEDIAD_OFF, 5);
-    finishTodaysWords($planner);
-
-    Livewire::test(Home::class)
-        ->assertSee('5 more words')
-        ->call('learnMore')
-        ->assertRedirect(route('learn'));
-
-    expect($planner->todaysNewWords())->toHaveCount(10);
 });
 
 it('does not offer more words before today\'s batch is picked', function () {

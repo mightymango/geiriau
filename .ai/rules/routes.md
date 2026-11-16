@@ -5,5 +5,5 @@ paths:
 
 # Routes
 
-## Pages are full-page Livewire components
-Build each screen as a full-page Livewire class component with `#[Layout('layouts.app')]`, routed with `Route::livewire()`. Don't add controllers.
+## Screens are native components
+Build each screen as a `NativeComponent` in `app/NativeComponents` with its view in `resources/views/native`, routed with `Route::native()` in `routes/mobile.php`. Tab screens use `AppLayout`. Don't add Livewire, controllers or web views.

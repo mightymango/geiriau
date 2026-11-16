@@ -5,8 +5,8 @@ Before planning or editing, find the row whose globs match the file's path and r
 | Applies to | Rule file |
 | --- | --- |
 | app/** | .ai/rules/app.md |
-| app/Livewire/** | .ai/rules/livewire.md |
 | app/Models/** | .ai/rules/models.md |
+| app/NativeComponents/** | .ai/rules/native-components.md |
 | app/Providers/** | .ai/rules/providers.md |
 | routes/** | .ai/rules/routes.md |
 | app/Services/** | .ai/rules/services.md |

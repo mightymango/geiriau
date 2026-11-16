@@ -8,5 +8,5 @@ paths:
 ## Welsh-first bilingual copy
 Write UI text in Welsh with the English beneath or beside it, directly in Blade. Don't use translation files or `__()`.
 
-## Tailwind stone palette with dark mode
-Style with Tailwind utilities on the `stone` palette and give every colour a `dark:` counterpart.
+## Colour with theme tokens
+Style native views with theme tokens (`bg-theme-*`, `text-theme-*`, `border-theme-*`). Add any new colour as a token in both the `light` and `dark` blocks of `config/native-ui.php`, never as a hex value or palette class in a view.
