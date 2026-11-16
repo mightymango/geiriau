@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1290 2796" width="1290" height="2796">
+<rect width="1290" height="2796" fill="#15100F"/><defs><radialGradient id="glow" cx="645" cy="1250" r="900" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#C8102E" stop-opacity="0.22"/><stop offset="1" stop-color="#C8102E" stop-opacity="0"/></radialGradient></defs><rect width="1290" height="2796" fill="url(#glow)"/>
+<defs><filter id="sh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="24" stdDeviation="30" flood-color="#000" flood-opacity="0.45"/></filter></defs>
+<g transform="translate(645 1250) scale(0.85)">
+  <rect x="-230" y="-290" width="460" height="580" rx="56" fill="#C8102E" opacity="0.25" transform="rotate(14) translate(34 -8)"/>
+  <rect x="-230" y="-290" width="460" height="580" rx="56" fill="#C8102E" opacity="0.5" transform="rotate(5) translate(14 -4)"/>
+  <g transform="rotate(-6)" filter="url(#sh)">
+    <rect x="-230" y="-290" width="460" height="580" rx="56" fill="#FFFDF8"/>
+    <text x="0" y="95" text-anchor="middle" font-family="Inter" font-weight="900" font-size="390" fill="#C8102E">ŵ</text>
+    <g fill="#00A651"><circle cx="-120" cy="200" r="22"/><circle cx="-60" cy="200" r="22"/><circle cx="0" cy="200" r="22"/>
+      <circle cx="60" cy="200" r="22" fill="#D9E9DE"/><circle cx="120" cy="200" r="22" fill="#D9E9DE"/></g>
+  </g>
+</g>
+<text x="645" y="1720" text-anchor="middle" font-family="Inter" font-weight="800" font-size="150" letter-spacing="-3" fill="#FFFDF8">Geiriau</text>
+<text x="645" y="1810" text-anchor="middle" font-family="Inter" font-weight="500" font-size="54" letter-spacing="2" fill="#B8A9A6">Pum gair y dydd</text>
+</svg>

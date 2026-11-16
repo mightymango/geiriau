@@ -56,6 +56,10 @@ Tests: `composer test`. `tests/Unit/SchedulerTest.php` covers the scheduling mat
 
 `public/icon.png` (1024×1024, no transparency) is what NativePHP builds the iOS and Android icons from. It's option A, a flashcard with ŵ and the daily five. The SVG sources for all three options are in `resources/icon/`. To switch, render another option with `rsvg-convert -w 1024 resources/icon/b-ll.svg | convert - -alpha off public/icon.png`, then run `php artisan native:run` again.
 
+## Splash screens
+
+`public/splash.png` (light) and `public/splash-dark.png` (dark) are 1290×2796 and match the icon: the card stack, **Geiriau** and *Pum gair y dydd* ("five words a day"). Everything sits in the middle, so cropping for other screen shapes only trims background. The SVG sources are in `resources/icon/`.
+
 ## Daily reminder
 
 Uses [smronju/nativephp-local-notifications](https://packagist.org/packages/smronju/nativephp-local-notifications) (free, MIT; iOS 15+, Android 8+). Notifications are scheduled on the phone, so no server or Firebase is needed.
