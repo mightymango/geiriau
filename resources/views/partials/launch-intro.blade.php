@@ -10,16 +10,13 @@
     (() => {
         const intro = document.getElementById('launch-intro');
 
-        try {
-            if (sessionStorage.getItem('launchIntroShown')) {
-                return;
-            }
+        if (window.launchIntroShown) {
+            intro.remove();
 
-            sessionStorage.setItem('launchIntroShown', '1');
-        } catch (error) {
             return;
         }
 
+        window.launchIntroShown = true;
         intro.classList.remove('hidden');
 
         const dismiss = () => {
@@ -27,7 +24,12 @@
             setTimeout(() => intro.remove(), 500);
         };
 
+        const holdAfterNativeSplash = () => setTimeout(dismiss, 1200);
+
         intro.addEventListener('click', dismiss, { once: true });
-        setTimeout(dismiss, 1200);
+
+        document.readyState === 'complete'
+            ? holdAfterNativeSplash()
+            : window.addEventListener('load', holdAfterNativeSplash, { once: true });
     })();
 </script>
