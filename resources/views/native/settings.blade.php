@@ -1,4 +1,4 @@
-<native:scroll-view class="w-full h-full bg-theme-background">
+<native:scroll-view class="w-full h-full bg-theme-background {{ $onboarded ? '' : 'safe-area' }}">
     <native:column class="w-full gap-6 px-5 py-6">
         <native:column class="gap-1">
             <native:text class="text-3xl font-bold tracking-tight text-theme-on-surface">{{ $onboarded ? 'Gosodiadau' : 'Croeso!' }}</native:text>

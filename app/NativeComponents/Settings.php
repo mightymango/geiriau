@@ -40,7 +40,6 @@ class Settings extends NativeComponent
         $this->onboarded = $planner->isOnboarded();
         $this->newPerDay = $planner->newPerDay();
         $this->mynediadMode = $planner->mynediadMode();
-        $this->hidesTabBar = ! $this->onboarded;
     }
 
     public function save(StudyPlanner $planner, DailyReminders $reminders): void
@@ -106,7 +105,7 @@ class Settings extends NativeComponent
 
         $planner->resetProgress();
 
-        $this->replace('/settings');
+        $this->replace('/welcome');
     }
 
     public function render(): View

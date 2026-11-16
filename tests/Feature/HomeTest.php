@@ -19,10 +19,10 @@ function onboard(): StudyPlanner
     return $planner;
 }
 
-it('sends you to setup on first launch', function () {
-    Native::test(Home::class)
-        ->assertReplacedWith('/settings');
-});
+it('sends every screen to the welcome until you are set up', function (string $uri) {
+    Native::visit($uri)
+        ->assertReplacedWith('/welcome');
+})->with(['/', '/study', '/words', '/learn', '/settings']);
 
 it('greets you by name', function () {
     onboard();
@@ -82,4 +82,34 @@ it('offers more words once everything is done', function () {
         ->assertNavigatedTo('/learn');
 
     expect($planner->todaysNewWords())->toHaveCount(10);
+});
+
+it('shows only the first ten of today\'s words until you ask for more', function () {
+    $planner = onboard();
+    $planner->todaysNewWords();
+
+    foreach (range(1, 2) as $batch) {
+        while ($card = $planner->nextCard()) {
+            $planner->answer($card, Grade::Easy);
+        }
+
+        $planner->learnMore();
+    }
+
+    $words = $planner->todaysNewWords()->values();
+
+    Native::test(Home::class)
+        ->assertSee($words[9]->cy)
+        ->assertDontSee($words[10]->cy)
+        ->tap('Mwy… · 5 more')
+        ->assertSee($words[14]->cy)
+        ->tap('Llai · Show less')
+        ->assertDontSee($words[10]->cy);
+});
+
+it('has no more button with ten words or fewer', function () {
+    onboard()->todaysNewWords();
+
+    Native::test(Home::class)
+        ->assertDontSee('Mwy…');
 });

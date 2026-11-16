@@ -35,10 +35,14 @@
                 <native:text class="text-sm text-theme-on-surface-variant">You've worked through the whole word bank. Add your own words from class in Geiriau.</native:text>
             @else
                 <native:row class="w-full flex-wrap gap-2">
-                    @foreach($newWords as $word)
+                    @foreach($shownWords as $word)
                         <native:text native:key="word-{{ $word->id }}" class="rounded-full bg-theme-surface-variant px-3 py-1 text-sm text-theme-on-surface">{{ $word->cy }}</native:text>
                     @endforeach
                 </native:row>
+
+                @if($hiddenWordCount > 0)
+                    <native:button variant="ghost" size="sm" class="self-start" @press="toggleWords">{{ $showAllWords ? 'Llai · Show less' : "Mwy… · {$hiddenWordCount} more" }}</native:button>
+                @endif
 
                 @if($unseenNew > 0)
                     <native:button variant="secondary" class="w-full" @press="meetWords">Meet today's words</native:button>

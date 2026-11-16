@@ -15,10 +15,11 @@ beforeEach(function () {
 });
 
 it('welcomes you on first launch without the tab bar', function () {
-    Native::visit('/settings')
+    Native::visit('/welcome')
+        ->assertNoNavigation()
         ->assertSee('Croeso!')
         ->assertSee("A few quick choices and you're ready.")
-        ->assertTabBarHidden();
+        ->assertMissingElement('bottom_nav_item');
 });
 
 it('sets you up and takes you home', function () {
@@ -83,7 +84,7 @@ it('asks before wiping progress', function () {
         ->tap('Reset progress')
         ->assertNativeCalled('Dialog.Alert')
         ->emitNative(ButtonPressed::class, ['index' => 1, 'label' => 'Reset', 'id' => 'reset-progress'])
-        ->assertReplacedWith('/settings');
+        ->assertReplacedWith('/welcome');
 
     expect($this->planner->isOnboarded())->toBeFalse()
         ->and(Word::query()->whereNotNull('introduced_at')->count())->toBe(0);
