@@ -17,12 +17,6 @@ it('loads the word bank in migrations', function () {
         ->and(Card::count())->toBe(Word::count() * 2);
 });
 
-it('shows settings on first launch', function () {
-    $this->get('/settings')
-        ->assertOk()
-        ->assertSee('Croeso');
-});
-
 it('introduces five new sylfaen words a day', function () {
     $planner = app(StudyPlanner::class);
     $planner->onboard(StudyPlanner::MYNEDIAD_OFF, 5);

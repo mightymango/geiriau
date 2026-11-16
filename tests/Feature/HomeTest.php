@@ -21,7 +21,7 @@ function onboard(): StudyPlanner
 
 it('sends you to setup on first launch', function () {
     Native::test(Home::class)
-        ->assertExitedToWeb('/settings');
+        ->assertReplacedWith('/settings');
 });
 
 it('greets you by name', function () {

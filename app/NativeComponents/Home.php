@@ -13,7 +13,7 @@ class Home extends NativeComponent
     public function mount(StudyPlanner $planner, DailyReminders $reminders): void
     {
         if (! $planner->isOnboarded()) {
-            $this->exitToWeb('/settings');
+            $this->replace('/settings');
 
             return;
         }
