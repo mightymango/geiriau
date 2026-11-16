@@ -16,6 +16,7 @@
         "laravel/tinker": "^3.0",
         "livewire/livewire": "^4.0",
         "nativephp/mobile": "^3.1|^4.0",
+        "nativephp/mobile-ui": "^0.10.0",
         "smronju/nativephp-local-notifications": "^1.1"
     },
     "require-dev": {

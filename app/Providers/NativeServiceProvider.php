@@ -35,6 +35,8 @@ class NativeServiceProvider extends ServiceProvider
     {
         return [
             \Smronju\NativephpLocalNotifications\LocalNotificationsServiceProvider::class,
+            \Native\Mobile\UI\NativeUIServiceProvider::class,
+        
         
         ];
     }
