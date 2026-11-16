@@ -1,6 +1,6 @@
 # Geiriau: 5 Welsh words a day
 
-A NativePHP Mobile app (Laravel + Livewire) for learning Welsh vocabulary at **Sylfaen** level, with **Mynediad** words kept fresh alongside. It introduces 5 new words a day and uses spaced repetition so you see each word again just before you'd forget it.
+A NativePHP Mobile app (Laravel with native iOS and Android screens) for learning Welsh vocabulary at **Sylfaen** level, with **Mynediad** words kept fresh alongside. It introduces 5 new words a day and uses spaced repetition so you see each word again just before you'd forget it.
 
 ## How it teaches
 
@@ -31,18 +31,12 @@ At 5 a day the Sylfaen bank lasts about 52 days.
 
 ## Setup
 
-Requires PHP 8.3+, Composer and Node.
+Requires PHP 8.3+ and Composer, plus Xcode for iOS or Android Studio for Android.
 
 ```bash
 git clone https://github.com/mightymango/geiriau.git
 cd geiriau
-composer run setup     # installs packages, creates .env + SQLite db, migrates (loads the word bank), builds assets
-composer run dev       # or: php artisan serve — try it in a phone-width browser window first
-```
-
-On a phone (needs Xcode for iOS or Android Studio for Android):
-
-```bash
+composer run setup     # installs packages, creates .env + SQLite db, migrates (loads the word bank)
 composer run native:plugins    # one-time: registers the local-notifications plugin
 php artisan native:install
 php artisan native:run         # pick a simulator or connected device
@@ -50,7 +44,9 @@ php artisan native:run         # pick a simulator or connected device
 
 The app ID and version are in `.env` (`NATIVEPHP_APP_ID=com.mightymango.geiriau`).
 
-Tests: `composer test`. `tests/Unit/SchedulerTest.php` covers the scheduling maths and word bank; `tests/Feature/StudyPlannerTest.php` covers the daily 5, unlocking production cards and Mynediad placement.
+Keep `NATIVEPHP_APP_VERSION=DEBUG` while developing, so the phone unpacks fresh code on every launch. Use `php artisan native:release` to set a real version for TestFlight or the App Store.
+
+Tests: `composer test`. `tests/Unit/SchedulerTest.php` covers the scheduling maths and word bank; `tests/Feature/StudyPlannerTest.php` covers the daily 5, unlocking production cards and Mynediad placement. Each screen has its own test in `tests/Feature`, using NativePHP's `Native::test()`.
 
 ## App icon
 
@@ -66,7 +62,7 @@ Uses [smronju/nativephp-local-notifications](https://packagist.org/packages/smro
 
 - The next 7 days are scheduled as one-off notifications and rebuilt whenever you open the app or finish a session. A repeating alarm couldn't skip days you've already done.
 - The app asks for notification permission once, when you finish the welcome screen.
-- In a desktop browser there's no phone to notify, so set `REMINDER_DRIVER=log` and check `storage/logs/laravel.log` to see what would be scheduled.
+- Off the phone there's nothing to notify, so set `REMINDER_DRIVER=log` and check `storage/logs/laravel.log` to see what would be scheduled.
 - To use NativePHP's paid official plugin instead (tap actions, badges), write a gateway implementing `App\Services\Reminders\NotificationGateway` and bind it in `StudyServiceProvider`.
 
 ## Structure
@@ -79,7 +75,11 @@ app/Services/
   StudyPlanner.php       Daily batch of new words, queue order, Mynediad placement, stats, streak
   WordBank.php           Parses/syncs words.txt
   Reminders/             DailyReminders + notification gateways (plugin / log)
-app/Livewire/            Home · Learn (meet today's words) · Study · Words · Settings
+app/NativeComponents/    Home · Learn (meet today's words) · Study · Words · Settings
+app/NativeLayouts/       AppLayout: the tab bar shared by the four tab screens
+resources/views/native/  The screens' native views (SwiftUI on iOS, Compose on Android)
+routes/mobile.php        Native routes
+config/native-ui.php     Theme colours, light and dark
 config/cymraeg.php       new_per_day, backlog_limit, steps, rollover hour…
 ```
 
