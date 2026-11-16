@@ -27,7 +27,10 @@
                     @endif
                 </native:column>
 
-                <native:text class="w-full text-center text-xs text-theme-on-surface-variant">Say it out loud, then use it in a sentence of your own.</native:text>
+                <native:column class="w-full items-center gap-1">
+                    <native:text class="w-full text-center text-xs font-medium text-theme-on-surface-variant">Defnyddiwch e mewn brawddeg</native:text>
+                    <native:text class="w-full text-center text-xs text-theme-on-surface-variant">Say it out loud, then use it in a sentence of your own.</native:text>
+                </native:column>
             </native:column>
 
             <native:row class="w-full gap-3">
