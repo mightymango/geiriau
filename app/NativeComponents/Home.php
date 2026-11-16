@@ -23,7 +23,7 @@ class Home extends NativeComponent
 
     public function meetWords(): void
     {
-        $this->exitToWeb('/learn');
+        $this->navigate('/learn');
     }
 
     public function practise(): void
@@ -35,7 +35,7 @@ class Home extends NativeComponent
     {
         $planner->learnMore();
 
-        $this->exitToWeb('/learn');
+        $this->navigate('/learn');
     }
 
     public function render(): View

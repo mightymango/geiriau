@@ -57,7 +57,7 @@ it('lists today\'s new words and opens them to learn', function () {
     Native::test(Home::class)
         ->assertSee($words->first()->cy)
         ->tap("Meet today's words")
-        ->assertExitedToWeb('/learn');
+        ->assertNavigatedTo('/learn');
 });
 
 it('starts practice when cards are due', function () {
@@ -79,7 +79,7 @@ it('offers more words once everything is done', function () {
     Native::test(Home::class)
         ->assertSee('Da iawn! Nothing due right now.')
         ->tap('Mwy o eiriau · 5 more words')
-        ->assertExitedToWeb('/learn');
+        ->assertNavigatedTo('/learn');
 
     expect($planner->todaysNewWords())->toHaveCount(10);
 });

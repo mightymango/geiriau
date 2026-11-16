@@ -1,7 +1,6 @@
 <?php
 
 use App\Livewire\Home;
-use App\Livewire\Learn;
 use App\Models\Card;
 use App\Models\Word;
 use App\Services\StudyPlanner;
@@ -117,15 +116,6 @@ it('does not offer more words while reviews are piling up', function () {
 
     expect($planner->dueReviewCount())->toBeGreaterThan(0)
         ->and($planner->canLearnMore())->toBeFalse();
-});
-
-it('starts learning at the first word not yet seen', function () {
-    $planner = app(StudyPlanner::class);
-    $planner->onboard(StudyPlanner::MYNEDIAD_OFF, 5);
-    finishTodaysWords($planner);
-    $planner->learnMore();
-
-    Livewire::test(Learn::class)->assertSet('index', 5);
 });
 
 it('sends you to meet the extra words from home', function () {

@@ -5,21 +5,21 @@
             <native:text class="text-3xl font-bold tracking-tight text-theme-on-surface">Shwmae{{ $name ? ", {$name}" : '' }}!</native:text>
         </native:column>
 
-        <native:row class="w-full gap-3">
-            <native:column class="flex-1 items-center gap-1 rounded-2xl bg-theme-surface p-4 shadow-sm">
-                <native:text class="text-2xl font-bold text-theme-primary">{{ $stats['due'] }}</native:text>
-                <native:text class="text-xs text-theme-on-surface-variant">i'w hymarfer</native:text>
-                <native:text class="text-xs text-theme-on-surface-variant">to practise</native:text>
+        <native:row class="w-full items-stretch gap-3">
+            <native:column class="flex-1 items-center justify-center gap-1 rounded-2xl bg-theme-surface px-2 py-4 shadow-sm">
+                <native:text class="text-center text-2xl font-bold text-theme-primary">{{ $stats['due'] }}</native:text>
+                <native:text class="text-center text-xs text-theme-on-surface-variant">i'w hymarfer</native:text>
+                <native:text class="text-center text-xs text-theme-on-surface-variant">to practise</native:text>
             </native:column>
-            <native:column class="flex-1 items-center gap-1 rounded-2xl bg-theme-surface p-4 shadow-sm">
-                <native:text class="text-2xl font-bold text-theme-success">{{ $stats['known'] }}</native:text>
-                <native:text class="text-xs text-theme-on-surface-variant">geiriau</native:text>
-                <native:text class="text-xs text-theme-on-surface-variant">words known</native:text>
+            <native:column class="flex-1 items-center justify-center gap-1 rounded-2xl bg-theme-surface px-2 py-4 shadow-sm">
+                <native:text class="text-center text-2xl font-bold text-theme-success">{{ $stats['known'] }}</native:text>
+                <native:text class="text-center text-xs text-theme-on-surface-variant">geiriau</native:text>
+                <native:text class="text-center text-xs text-theme-on-surface-variant">words known</native:text>
             </native:column>
-            <native:column class="flex-1 items-center gap-1 rounded-2xl bg-theme-surface p-4 shadow-sm">
-                <native:text class="text-2xl font-bold text-theme-on-surface">{{ $stats['streak'] }}</native:text>
-                <native:text class="text-xs text-theme-on-surface-variant">diwrnod</native:text>
-                <native:text class="text-xs text-theme-on-surface-variant">day streak</native:text>
+            <native:column class="flex-1 items-center justify-center gap-1 rounded-2xl bg-theme-surface px-2 py-4 shadow-sm">
+                <native:text class="text-center text-2xl font-bold text-theme-on-surface">{{ $stats['streak'] }}</native:text>
+                <native:text class="text-center text-xs text-theme-on-surface-variant">diwrnod</native:text>
+                <native:text class="text-center text-xs text-theme-on-surface-variant">day streak</native:text>
             </native:column>
         </native:row>
 

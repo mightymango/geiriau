@@ -99,6 +99,8 @@ return [
             // Tertiary accent — for highlights, badges, emphasis not covered by primary.
             'accent' => '#B45309',
             'on-accent' => '#FFFFFF',
+            'feminine' => '#E11D48',
+            'masculine' => '#0284C7',
         ],
 
         'dark' => [
@@ -129,6 +131,8 @@ return [
 
             'accent' => '#FBBF24',
             'on-accent' => '#1C1917',
+            'feminine' => '#FB7185',
+            'masculine' => '#38BDF8',
         ],
 
         // Corner radii (points / dp).
