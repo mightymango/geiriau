@@ -30,30 +30,25 @@ At 5 a day the Sylfaen bank lasts about 52 days.
 
 ## Setup
 
-These are app files to add to a fresh Laravel project:
+Requires PHP 8.3+, Composer and Node.
 
 ```bash
-laravel new geiriau          # no starter kit, SQLite
+git clone https://github.com/mightymango/geiriau.git
 cd geiriau
-# copy this repo's files over the top (app/, bootstrap/providers.php, config/, database/, resources/views/, routes/, tests/)
-composer require livewire/livewire nativephp/mobile
-php artisan migrate:fresh
-npm install && npm run build
-php artisan serve            # try it in a browser first (use a phone-width window)
+composer run setup     # installs packages, creates .env + SQLite db, migrates (loads the word bank), builds assets
+composer run dev       # or: php artisan serve — try it in a phone-width browser window first
 ```
 
-Then on to the phone:
+On a phone (needs Xcode for iOS or Android Studio for Android):
 
 ```bash
-# .env
-NATIVEPHP_APP_ID=com.mightymango.geiriau
-NATIVEPHP_APP_VERSION=1.0.0
-
 php artisan native:install
-php artisan native:run       # pick iOS simulator / Android device
+php artisan native:run         # pick a simulator or connected device
 ```
 
-Run the unit tests with `php artisan test --filter=SchedulerTest`.
+The app ID and version are in `.env` (`NATIVEPHP_APP_ID=com.mightymango.geiriau`).
+
+Tests: `composer test`. `tests/Unit/SchedulerTest.php` covers the scheduling maths and word bank; `tests/Feature/StudyPlannerTest.php` covers the daily 5, unlocking production cards and Mynediad placement.
 
 ## Structure
 

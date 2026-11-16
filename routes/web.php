@@ -7,8 +7,8 @@ use App\Livewire\Study;
 use App\Livewire\Words;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', Home::class)->name('home');
-Route::get('/learn', Learn::class)->name('learn');
-Route::get('/study', Study::class)->name('study');
-Route::get('/words', Words::class)->name('words');
-Route::get('/settings', Settings::class)->name('settings');
+Route::livewire('/', Home::class)->name('home');
+Route::livewire('/learn', Learn::class)->name('learn');
+Route::livewire('/study', Study::class)->name('study');
+Route::livewire('/words', Words::class)->name('words');
+Route::livewire('/settings', Settings::class)->name('settings');
