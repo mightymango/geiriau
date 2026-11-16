@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs><radialGradient id="bg" cx="0.5" cy="0.45" r="0.75"><stop offset="0" stop-color="#127A4C"/><stop offset="1" stop-color="#06402A"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <g fill="#FFD23F" stroke="#F2B705" stroke-width="10"><ellipse cx="512" cy="300" rx="118" ry="200" transform="rotate(0 512 512)"/><ellipse cx="512" cy="300" rx="118" ry="200" transform="rotate(60 512 512)"/><ellipse cx="512" cy="300" rx="118" ry="200" transform="rotate(120 512 512)"/><ellipse cx="512" cy="300" rx="118" ry="200" transform="rotate(180 512 512)"/><ellipse cx="512" cy="300" rx="118" ry="200" transform="rotate(240 512 512)"/><ellipse cx="512" cy="300" rx="118" ry="200" transform="rotate(300 512 512)"/></g>
+  <circle cx="512" cy="512" r="150" fill="#F28C28"/>
+  <circle cx="512" cy="512" r="150" fill="none" stroke="#D9661A" stroke-width="22" stroke-dasharray="30 22"/>
+  <circle cx="512" cy="512" r="96" fill="#E0701C"/>
+  <text x="512" y="562" text-anchor="middle" font-family="Inter, 'Inter Display', system-ui, sans-serif" font-weight="900" font-size="150" fill="#FFF6E0">5</text>
+</svg>

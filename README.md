@@ -52,6 +52,10 @@ The app ID and version are in `.env` (`NATIVEPHP_APP_ID=com.mightymango.geiriau`
 
 Tests: `composer test`. `tests/Unit/SchedulerTest.php` covers the scheduling maths and word bank; `tests/Feature/StudyPlannerTest.php` covers the daily 5, unlocking production cards and Mynediad placement.
 
+## App icon
+
+`public/icon.png` (1024×1024, no transparency) is what NativePHP builds the iOS and Android icons from. It's option A, a flashcard with ŵ and the daily five. The SVG sources for all three options are in `resources/icon/`. To switch, render another option with `rsvg-convert -w 1024 resources/icon/b-ll.svg | convert - -alpha off public/icon.png`, then run `php artisan native:run` again.
+
 ## Daily reminder
 
 Uses [smronju/nativephp-local-notifications](https://packagist.org/packages/smronju/nativephp-local-notifications) (free, MIT; iOS 15+, Android 8+). Notifications are scheduled on the phone, so no server or Firebase is needed.
