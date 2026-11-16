@@ -1,84 +1,71 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\Card;
 use App\Models\Word;
 use App\Services\StudyPlanner;
 use App\Srs\Grade;
 use Carbon\CarbonImmutable;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
-class StudyPlannerTest extends TestCase
-{
-    use RefreshDatabase;
+beforeEach(function () {
+    $this->travelTo(CarbonImmutable::parse('2026-11-16 10:00:00'));
+});
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->travelTo(CarbonImmutable::parse('2026-11-16 10:00:00'));
-    }
+it('loads the word bank in migrations', function () {
+    expect(Word::count())->toBeGreaterThan(400)
+        ->and(Card::count())->toBe(Word::count() * 2);
+});
 
-    public function test_word_bank_is_loaded_by_migrations(): void
-    {
-        $this->assertGreaterThan(400, Word::count());
-        $this->assertSame(Word::count() * 2, Card::count());
-    }
+it('shows settings on first launch', function () {
+    $this->get('/settings')
+        ->assertOk()
+        ->assertSee('Croeso');
+});
 
-    public function test_first_launch_shows_settings(): void
-    {
-        $this->get('/settings')->assertOk()->assertSee('Croeso');
-    }
+it('introduces five new sylfaen words a day', function () {
+    $planner = app(StudyPlanner::class);
+    $planner->onboard(StudyPlanner::MYNEDIAD_OFF, 5);
 
-    public function test_five_new_sylfaen_words_a_day(): void
-    {
-        $planner = app(StudyPlanner::class);
-        $planner->onboard(StudyPlanner::MYNEDIAD_OFF, 5);
+    $today = $planner->todaysNewWords();
 
-        $today = $planner->todaysNewWords();
-        $this->assertCount(5, $today);
-        $this->assertSame(['sylfaen'], $today->pluck('level')->unique()->values()->all());
+    expect($today)->toHaveCount(5)
+        ->and($today->pluck('level')->unique()->values()->all())->toBe(['sylfaen'])
+        ->and($planner->todaysNewWords())->toHaveCount(5);
 
-        // Asking again on the same day doesn't add more.
-        $this->assertCount(5, $planner->todaysNewWords());
+    $this->travelTo(CarbonImmutable::parse('2026-11-17 10:00:00'));
 
-        $this->travelTo(CarbonImmutable::parse('2026-11-17 10:00:00'));
-        $this->assertCount(5, $planner->todaysNewWords());
-        $this->assertSame(10, Word::whereNotNull('introduced_at')->count());
-    }
+    expect($planner->todaysNewWords())->toHaveCount(5)
+        ->and(Word::whereNotNull('introduced_at')->count())->toBe(10);
+});
 
-    public function test_recognising_a_word_unlocks_production_next_day(): void
-    {
-        $planner = app(StudyPlanner::class);
-        $planner->onboard(StudyPlanner::MYNEDIAD_OFF, 5);
-        $planner->todaysNewWords();
+it('unlocks production the next day once a word is recognised', function () {
+    $planner = app(StudyPlanner::class);
+    $planner->onboard(StudyPlanner::MYNEDIAD_OFF, 5);
+    $planner->todaysNewWords();
 
-        $card = $planner->nextCard();
-        $this->assertSame(Card::RECOGNISE, $card->direction);
-        $this->assertSame('new', $card->state);
+    $card = $planner->nextCard();
 
-        $planner->answer($card, Grade::Good);           // → 10 min step
-        $planner->answer($card->fresh(), Grade::Good);  // → graduates to 1 day
+    expect($card->direction)->toBe(Card::RECOGNISE)
+        ->and($card->state)->toBe('new');
 
-        $this->assertSame('review', $card->fresh()->state);
+    $planner->answer($card, Grade::Good);
+    $planner->answer($card->fresh(), Grade::Good);
 
-        $produce = Card::where('word_id', $card->word_id)->where('direction', Card::PRODUCE)->first();
-        $this->assertTrue($produce->active);
-        $this->assertSame('learning', $produce->state);
-        $this->assertTrue($produce->due_at->greaterThan(now()));
-    }
+    $produce = Card::where('word_id', $card->word_id)->where('direction', Card::PRODUCE)->first();
 
-    public function test_mynediad_as_known_schedules_reviews_gradually(): void
-    {
-        $planner = app(StudyPlanner::class);
-        $planner->onboard(StudyPlanner::MYNEDIAD_REVIEW, 5);
+    expect($card->fresh()->state)->toBe('review')
+        ->and($produce->active)->toBeTrue()
+        ->and($produce->state)->toBe('learning')
+        ->and($produce->due_at->greaterThan(now()))->toBeTrue();
+});
 
-        $mynediad = Card::whereHas('word', fn ($q) => $q->where('level', 'mynediad'));
-        $this->assertSame(Word::where('level', 'mynediad')->count() * 2, (clone $mynediad)->where('active', true)->count());
+it('spreads out reviews when mynediad is marked as known', function () {
+    $planner = app(StudyPlanner::class);
+    $planner->onboard(StudyPlanner::MYNEDIAD_REVIEW, 5);
 
-        // Only the first day's batch is due today; the rest are spread out.
-        $dueNow = (clone $mynediad)->where('due_at', '<=', now())->count();
-        $this->assertSame(config('cymraeg.mynediad_per_day'), $dueNow);
-    }
-}
+    $mynediadCards = Card::whereHas('word', fn ($query) => $query->where('level', 'mynediad'));
+    $activeCount = (clone $mynediadCards)->where('active', true)->count();
+    $dueNowCount = (clone $mynediadCards)->where('due_at', '<=', now())->count();
+
+    expect($activeCount)->toBe(Word::where('level', 'mynediad')->count() * 2)
+        ->and($dueNowCount)->toBe(config('cymraeg.mynediad_per_day'));
+});
