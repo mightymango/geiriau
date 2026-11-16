@@ -12,6 +12,7 @@ A NativePHP Mobile app (Laravel + Livewire) for learning Welsh vocabulary at **S
 | **Both directions, staggered** | *Cymraeg → English* first. *English → Cymraeg* (the harder production card) unlocks the **next day** once you can recognise the word, so it's a genuine effort to recall. Typing is optional, and it tells you when only the accents (â, ŵ, ŷ…) are off. |
 | **Interleaving** | Due reviews come in a random order, mixing themes and directions. |
 | **Keep the workload sustainable** | If more than 80 reviews are waiting, no new words are added that day. 5 a day settles at roughly 20–30 cards a day. |
+| **A daily cue** | One reminder a day at a time you choose (default 19:00). It says what's waiting, is skipped once you've finished for the day, and stops after a week if you stop opening the app. |
 | **Gender shown every time** | Nouns show **eb** (feminine) / **eg** (masculine), the same labels as the coursebooks, because gender drives mutations. |
 
 ### Mynediad handling (chosen on first launch, changeable in Settings)
@@ -42,6 +43,7 @@ composer run dev       # or: php artisan serve — try it in a phone-width brows
 On a phone (needs Xcode for iOS or Android Studio for Android):
 
 ```bash
+composer run native:plugins    # one-time: registers the local-notifications plugin
 php artisan native:install
 php artisan native:run         # pick a simulator or connected device
 ```
@@ -49,6 +51,15 @@ php artisan native:run         # pick a simulator or connected device
 The app ID and version are in `.env` (`NATIVEPHP_APP_ID=com.mightymango.geiriau`).
 
 Tests: `composer test`. `tests/Unit/SchedulerTest.php` covers the scheduling maths and word bank; `tests/Feature/StudyPlannerTest.php` covers the daily 5, unlocking production cards and Mynediad placement.
+
+## Daily reminder
+
+Uses [smronju/nativephp-local-notifications](https://packagist.org/packages/smronju/nativephp-local-notifications) (free, MIT; iOS 15+, Android 8+). Notifications are scheduled on the phone, so no server or Firebase is needed.
+
+- The next 7 days are scheduled as one-off notifications and rebuilt whenever you open the app or finish a session. A repeating alarm couldn't skip days you've already done.
+- The app asks for notification permission once, when you finish the welcome screen.
+- In a desktop browser there's no phone to notify, so set `REMINDER_DRIVER=log` and check `storage/logs/laravel.log` to see what would be scheduled.
+- To use NativePHP's paid official plugin instead (tap actions, badges), write a gateway implementing `App\Services\Reminders\NotificationGateway` and bind it in `StudyServiceProvider`.
 
 ## Structure
 
@@ -59,12 +70,12 @@ app/Srs/                 Pure-PHP scheduler (no Laravel), unit-tested
 app/Services/
   StudyPlanner.php       Daily batch of new words, queue order, Mynediad placement, stats, streak
   WordBank.php           Parses/syncs words.txt
+  Reminders/             DailyReminders + notification gateways (plugin / log)
 app/Livewire/            Home · Learn (meet today's words) · Study · Words · Settings
 config/cymraeg.php       new_per_day, backlog_limit, steps, rollover hour…
 ```
 
 ## Ideas for later
-- Daily reminder notification (NativePHP local notifications plugin).
 - Recorded audio per word. Welsh text-to-speech on phones is patchy, so recordings from a native speaker (e.g. a tutor) would be best.
 - Example sentences and cloze cards ("Dw i'n ___ coffi") once the core vocab is in.
 - Mutation drills for feminine nouns after *y/'r* (cath → y gath).

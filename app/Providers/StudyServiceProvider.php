@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Services\Reminders\DailyReminders;
+use App\Services\Reminders\LocalNotificationsGateway;
+use App\Services\Reminders\LogGateway;
+use App\Services\Reminders\NotificationGateway;
 use App\Services\StudyPlanner;
 use App\Srs\Scheduler;
 use App\Srs\SchedulerConfig;
@@ -26,5 +30,14 @@ class StudyServiceProvider extends ServiceProvider
         ));
 
         $this->app->singleton(StudyPlanner::class);
+
+        $this->app->singleton(NotificationGateway::class, function () {
+            $driver = config('cymraeg.reminder_driver')
+                ?: (class_exists(\Smronju\NativephpLocalNotifications\Facades\LocalNotifications::class) ? 'local' : 'log');
+
+            return $driver === 'local' ? new LocalNotificationsGateway : new LogGateway;
+        });
+
+        $this->app->singleton(DailyReminders::class);
     }
 }

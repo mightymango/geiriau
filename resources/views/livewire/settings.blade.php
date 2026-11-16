@@ -2,7 +2,7 @@
     <header>
         <h1 class="text-2xl font-bold">{{ $onboarded ? 'Gosodiadau' : 'Croeso!' }}</h1>
         @unless ($onboarded)
-            <p class="mt-1 text-stone-500">Two quick choices and you're ready.</p>
+            <p class="mt-1 text-stone-500">A few quick choices and you're ready.</p>
         @endunless
     </header>
 
@@ -32,6 +32,25 @@
             </div>
             <input type="range" min="1" max="20" wire:model.live="newPerDay" class="mt-3 w-full accent-red-700">
             <p class="mt-2 text-xs text-stone-500">Each new word adds roughly 6–8 reviews over the following month. 5 a day settles at about 20–30 cards a day.</p>
+        </section>
+
+        <section class="rounded-2xl bg-white p-5 shadow-sm dark:bg-stone-900">
+            <label class="flex items-center justify-between gap-4">
+                <span>
+                    <span class="block font-semibold">Daily reminder</span>
+                    <span class="text-sm text-stone-500">Same time every day, to build a habit. Skipped once you've finished for the day.</span>
+                </span>
+                <input type="checkbox" wire:model.live="reminderEnabled" class="h-6 w-6 shrink-0 accent-red-700">
+            </label>
+            @if ($reminderEnabled)
+                <div class="mt-4 flex items-center justify-between">
+                    <span class="text-sm">Remind me at</span>
+                    <input type="time" wire:model="reminderTime"
+                           class="rounded-lg border border-stone-300 px-3 py-2 dark:border-stone-700 dark:bg-stone-950">
+                </div>
+                @error('reminderTime') <p class="mt-1 text-xs text-rose-600">{{ $message }}</p> @enderror
+                <p class="mt-2 text-xs text-stone-500">Tip: tie it to something you already do every day, e.g. just after tea.</p>
+            @endif
         </section>
 
         <button class="w-full rounded-2xl bg-red-700 py-4 text-lg font-semibold text-white">{{ $onboarded ? 'Cadw' : 'Dechrau' }}</button>

@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Services\Reminders\DailyReminders;
 use App\Services\StudyPlanner;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -9,11 +10,14 @@ use Livewire\Component;
 #[Layout('layouts.app')]
 class Home extends Component
 {
-    public function mount(StudyPlanner $planner)
+    public function mount(StudyPlanner $planner, DailyReminders $reminders)
     {
         if (! $planner->isOnboarded()) {
             return $this->redirectRoute('settings', navigate: true);
         }
+
+        // Opening the app refreshes the week of reminders ahead.
+        $reminders->sync();
     }
 
     public function render(StudyPlanner $planner)

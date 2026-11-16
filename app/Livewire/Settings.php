@@ -2,7 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Services\Reminders\DailyReminders;
 use App\Services\StudyPlanner;
+use App\Models\Setting;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -15,34 +17,48 @@ class Settings extends Component
 
     public bool $onboarded = false;
 
+    public bool $reminderEnabled = true;
+
+    public string $reminderTime = '19:00';
+
     public bool $confirmingReset = false;
 
     public bool $saved = false;
 
-    public function mount(StudyPlanner $planner): void
+    public function mount(StudyPlanner $planner, DailyReminders $reminders): void
     {
+        $this->reminderEnabled = $reminders->enabled();
+        $this->reminderTime = $reminders->time();
         $this->onboarded = $planner->isOnboarded();
         $this->newPerDay = $planner->newPerDay();
         $this->mynediadMode = $planner->mynediadMode();
     }
 
-    public function save(StudyPlanner $planner)
+    public function save(StudyPlanner $planner, DailyReminders $reminders)
     {
         $this->validate([
             'newPerDay' => 'required|integer|min:1|max:20',
             'mynediadMode' => 'required|in:review,learn,off',
+            'reminderTime' => ['required', 'regex:/^([01]\d|2[0-3]):[0-5]\d$/'],
         ]);
 
         if (! $this->onboarded) {
             $planner->onboard($this->mynediadMode, $this->newPerDay);
+            Setting::put('reminder_enabled', $this->reminderEnabled ? '1' : '0');
+            Setting::put('reminder_time', $this->reminderTime);
+            if ($this->reminderEnabled) {
+                $reminders->requestPermission(); // iOS / Android 13+ ask once
+            }
+            $reminders->sync();
 
             return $this->redirectRoute('home', navigate: true);
         }
 
-        \App\Models\Setting::put('new_per_day', $this->newPerDay);
+        Setting::put('new_per_day', $this->newPerDay);
         if ($this->mynediadMode !== $planner->mynediadMode()) {
             $planner->setMynediadMode($this->mynediadMode);
         }
+        $reminders->configure($this->reminderEnabled, $this->reminderTime);
         $this->saved = true;
     }
 

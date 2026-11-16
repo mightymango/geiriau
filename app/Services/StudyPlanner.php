@@ -247,7 +247,7 @@ class StudyPlanner
 
         $learning = Card::query()->active()
             ->whereIn('state', [CardState::NEW, CardState::LEARNING, CardState::RELEARNING])
-            ->where('due_at', '<=', $endOfToday)->count();
+            ->where('due_at', '<', $endOfToday)->count();
 
         $known = Card::query()->active()->where('direction', Card::RECOGNISE)
             ->where('state', CardState::REVIEW);

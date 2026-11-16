@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Card;
+use App\Services\Reminders\DailyReminders;
 use App\Services\StudyPlanner;
 use App\Srs\Grade;
 use Livewire\Attributes\Layout;
@@ -51,6 +52,11 @@ class Study extends Component
     private function loadNext(StudyPlanner $planner): void
     {
         $this->cardId = $planner->nextCard()?->id;
+
+        // Finished everything due: drop today's reminder so it doesn't nag.
+        if ($this->cardId === null && $this->doneThisSession > 0) {
+            app(DailyReminders::class)->sync();
+        }
         $this->revealed = false;
         $this->attempt = '';
         $this->verdict = null;
