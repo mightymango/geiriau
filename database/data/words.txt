@@ -1,0 +1,537 @@
+# Geiriau — word bank (South Wales forms, to match the Dysgu Cymraeg "De" course books)
+#
+# Welsh | English | part of speech | gender (m/f) | note
+# Order within a level = the order new words are introduced.
+# Use "/" for accepted alternatives in the Welsh column (any one counts as correct when typed).
+# Add your own words here (or in the app). After editing, add a new migration that calls
+# WordBank::sync() so the change reaches the phone — progress on existing words is kept.
+
+@level mynediad
+
+@theme Greetings & phrases
+shwmae | hello | phrase | | South; also "sut mae"
+bore da | good morning | phrase
+prynhawn da | good afternoon | phrase
+noswaith dda | good evening | phrase
+nos da | good night | phrase
+sut dych chi? | how are you? | phrase
+diolch | thanks | phrase | | diolch yn fawr = thank you very much
+croeso | welcome / you're welcome | phrase
+os gwelwch chi'n dda | please | phrase | | informal: plîs
+esgusodwch fi | excuse me | phrase
+mae'n ddrwg 'da fi | I'm sorry | phrase | | also: mae'n flin 'da fi
+hwyl | bye / fun | phrase | | hwyl fawr = goodbye
+da iawn | very good | phrase
+iawn | OK / right | adv
+dim diolch | no thanks | phrase
+
+@theme People & family
+mam | mum | n | f
+tad | dad | n | m
+mab | son | n | m
+merch | girl / daughter | n | f
+brawd | brother | n | m
+chwaer | sister | n | f
+gŵr | husband | n | m
+gwraig | wife | n | f
+plentyn | child | n | m | plural: plant
+teulu | family | n | m
+ffrind | friend | n | m | plural: ffrindiau
+mam-gu | grandmother | n | f | South
+tad-cu | grandfather | n | m | South
+cariad | love / boyfriend / girlfriend | n | m
+babi | baby | n | m
+
+@theme Numbers
+un | one | num
+dau | two | num | | feminine: dwy
+tri | three | num | | feminine: tair
+pedwar | four | num | | feminine: pedair
+pump | five | num | | "pum" before a noun
+chwech | six | num | | "chwe" before a noun
+saith | seven | num
+wyth | eight | num
+naw | nine | num
+deg | ten | num
+ugain | twenty | num | | also: dau ddeg
+
+@theme Days & time
+dydd Llun | Monday | n | m
+dydd Mawrth | Tuesday | n | m
+dydd Mercher | Wednesday | n | m
+dydd Iau | Thursday | n | m
+dydd Gwener | Friday | n | m
+dydd Sadwrn | Saturday | n | m
+dydd Sul | Sunday | n | m
+heddiw | today | adv
+yfory | tomorrow | adv
+ddoe | yesterday | adv
+nawr | now | adv | | South (North: rŵan)
+heno | tonight | adv
+bore | morning | n | m
+prynhawn | afternoon | n | m
+nos | night | n | f
+wythnos | week | n | f
+penwythnos | weekend | n | m
+mis | month | n | m
+blwyddyn | year | n | f
+awr | hour | n | f
+amser | time | n | m | "Faint o'r gloch yw hi?" = what time is it?
+
+@theme Months
+Ionawr | January | n
+Chwefror | February | n
+Mawrth | March | n | | also Tuesday (dydd Mawrth)
+Ebrill | April | n
+Mai | May | n
+Mehefin | June | n
+Gorffennaf | July | n
+Awst | August | n
+Medi | September | n
+Hydref | October | n
+Tachwedd | November | n
+Rhagfyr | December | n
+
+@theme Weather
+tywydd | weather | n | m
+mae hi'n braf | it's fine | phrase
+mae hi'n bwrw glaw | it's raining | phrase
+mae hi'n oer | it's cold | phrase
+twym | warm | adj | | South
+poeth | hot | adj
+gwlyb | wet | adj
+gwyntog | windy | adj
+heulog | sunny | adj
+cymylog | cloudy | adj
+glaw | rain | n | m
+haul | sun | n | m
+eira | snow | n | m
+
+@theme Food & drink
+bwyd | food | n | m
+coffi | coffee | n | m
+te | tea | n | m
+paned | cuppa | n | f | paned o de = a cup of tea
+dŵr | water | n | m
+llaeth | milk | n | m | South (North: llefrith)
+bara | bread | n | m
+caws | cheese | n | m
+menyn | butter | n | m
+wy | egg | n | m | plural: wyau
+cig | meat | n | m
+cyw iâr | chicken (food) | n | m
+pysgod | fish (plural) | n | | singular: pysgodyn
+sglodion | chips | n
+tatws | potatoes | n
+llysiau | vegetables | n
+ffrwythau | fruit | n
+afal | apple | n | m
+teisen | cake | n | f | South
+siwgr | sugar | n | m
+cwrw | beer | n | m
+gwin | wine | n | m
+brecwast | breakfast | n | m
+cinio | lunch / dinner | n | m
+swper | supper | n | m
+
+@theme Places & transport
+tŷ | house | n | m | plural: tai
+gwaith | work | n | m
+ysgol | school | n | f
+siop | shop | n | f
+tref | town | n | f
+dinas | city | n | f
+pentref | village | n | m
+gardd | garden | n | f
+swyddfa | office | n | f
+ysbyty | hospital | n | m
+gorsaf | station | n | f
+caffi | café | n | m
+tafarn | pub | n | f
+traeth | beach | n | m
+mynydd | mountain | n | m
+gwlad | country | n | f
+car | car | n | m
+bws | bus | n | m
+trên | train | n | m
+
+@theme Verbs
+mynd | to go | v
+dod | to come | v
+gweld | to see | v
+gwneud | to do / to make | v
+cael | to have / to get | v
+bwyta | to eat | v
+yfed | to drink | v
+darllen | to read | v
+gweithio | to work | v
+byw | to live | v
+siarad | to speak | v
+dysgu | to learn / to teach | v
+hoffi | to like | v
+dwlu ar | to love (a thing) | v | | South
+casáu | to hate | v
+eisiau / moyn | to want | v | | moyn = South
+gallu | to be able to | v
+chwarae | to play | v
+prynu | to buy | v
+gwylio | to watch | v
+gwrando ar | to listen to | v
+edrych ar | to look at | v
+coginio | to cook | v
+cerdded | to walk | v
+rhedeg | to run | v
+nofio | to swim | v
+canu | to sing | v
+cysgu | to sleep | v
+codi | to get up / to lift | v
+mwynhau | to enjoy | v
+ffonio | to phone | v
+ysgrifennu | to write | v
+
+@theme Describing
+mawr | big | adj
+bach | small | adj
+da | good | adj
+drwg | bad / naughty | adj
+hapus | happy | adj
+trist | sad | adj
+wedi blino | tired | phrase
+newydd | new | adj
+hen | old | adj
+ifanc | young | adj
+prysur | busy | adj
+tal | tall | adj
+byr | short | adj
+ffein | nice / fine | adj | | South
+hyfryd | lovely | adj
+pert | pretty | adj | | South
+diddorol | interesting | adj
+diflas | boring | adj
+
+@theme Colours
+coch | red | adj
+glas | blue | adj
+gwyrdd | green | adj
+melyn | yellow | adj
+du | black | adj
+gwyn | white | adj
+llwyd | grey | adj
+
+@theme Questions
+beth? | what? | q
+ble? | where? | q
+pryd? | when? | q
+pwy? | who? | q
+sut? | how? | q
+faint? | how much / how many? | q
+pam? | why? | q
+pa? | which? | q | | pa un? = which one?
+
+@theme Free time & work
+pêl-droed | football | n
+rygbi | rugby | n | m
+teledu | television | n | m
+cerddoriaeth | music | n | f
+llyfr | book | n | m
+ffilm | film | n | f
+ci | dog | n | m | plural: cŵn
+cath | cat | n | f
+athro | teacher (man) | n | m
+athrawes | teacher (woman) | n | f
+meddyg | doctor | n | m
+
+@level sylfaen
+
+@theme Sylfaen grammar chunks
+es i | I went | phrase | | past tense of mynd
+ces i | I had / I got | phrase | | past tense of cael
+gwnes i | I did / I made | phrase | | past tense of gwneud
+des i | I came | phrase | | past tense of dod
+o'n i | I was | phrase | | o'n i'n byw yn… = I was living in…
+ro'n i'n arfer | I used to | phrase
+bydda i | I will (be) | phrase
+baswn i | I would | phrase
+hoffwn i | I would like | phrase
+rhaid i fi | I must | phrase | | South "fi"
+dylwn i | I should | phrase
+ga i? | may I (have)? | phrase
+mae'n well 'da fi | I prefer | phrase | | South
+dw i wedi | I have (done) | phrase | | dw i wedi bwyta = I've eaten
+dw i ddim yn siŵr | I'm not sure | phrase
+
+@theme Thinking & talking
+meddwl | to think | v
+credu | to believe | v
+gobeithio | to hope | v
+gwybod | to know (a fact) | v
+nabod | to know (a person) | v | | South
+cofio | to remember | v
+anghofio | to forget | v
+deall | to understand | v
+esbonio | to explain | v
+gofyn | to ask | v
+ateb | to answer | v
+dweud | to say / to tell | v
+clywed | to hear | v
+teimlo | to feel | v
+penderfynu | to decide | v
+cytuno | to agree | v
+trio | to try | v | | also: ceisio
+addo | to promise | v
+galw | to call | v
+
+@theme Everyday verbs
+dechrau | to start | v
+gorffen | to finish | v
+aros | to wait / to stay | v
+gadael | to leave | v
+cyrraedd | to arrive / to reach | v
+cwrdd â | to meet | v | | South; â → ag before a vowel
+helpu | to help | v
+poeni | to worry | v
+newid | to change | v
+defnyddio | to use | v
+talu | to pay | v
+gwisgo | to wear / to get dressed | v
+golchi | to wash | v
+glanhau | to clean | v
+paratoi | to prepare | v
+trefnu | to organise | v
+agor | to open | v
+cau | to close | v
+torri | to break / to cut | v
+dal | to catch / to hold | v | | also "still": dal i fwrw glaw
+rhoi | to give / to put | v
+dangos | to show | v
+dewis | to choose | v
+ffeindio | to find | v | | South; also: dod o hyd i
+chwilio am | to look for | v
+colli | to lose / to miss | v
+ennill | to win / to earn | v
+benthyg | to borrow / to lend | v
+anfon | to send | v
+llenwi | to fill | v
+eistedd | to sit | v
+sefyll | to stand | v
+cwympo | to fall | v | | South
+digwydd | to happen | v
+tyfu | to grow | v
+ymarfer | to practise | v
+gorffwys | to rest | v
+ymlacio | to relax | v
+dathlu | to celebrate | v
+priodi | to marry | v
+ymddeol | to retire | v
+symud | to move | v
+
+@theme Holidays & travel
+gwyliau | holiday(s) | n
+teithio | to travel | v
+ymweld â | to visit | v
+gyrru | to drive | v
+hedfan | to fly | v
+bwcio | to book | v
+tynnu llun | to take a photo | v
+gwario | to spend (money) | v
+treulio | to spend (time) | v
+taith | journey / trip | n | f
+dramor | abroad | adv | | mynd dramor = to go abroad
+maes awyr | airport | n | m
+awyren | aeroplane | n | f
+cwch | boat | n | m
+gwesty | hotel | n | m
+tocyn | ticket | n | m
+cês | suitcase | n | m
+pabell | tent | n | f
+carafán | caravan | n | f
+glan y môr | seaside | n | f
+môr | sea | n | m
+afon | river | n | f
+llyn | lake | n | m
+castell | castle | n | m
+eglwys | church | n | f
+capel | chapel | n | m
+amgueddfa | museum | n | f
+golygfa | view | n | f
+
+@theme Body & health
+corff | body | n | m
+pen | head | n | m
+wyneb | face | n | m
+gwallt | hair | n | m
+llygad | eye | n | m | plural: llygaid
+clust | ear | n | f
+trwyn | nose | n | m
+ceg | mouth | n | f
+dant | tooth | n | m | plural: dannedd
+gwddf | neck / throat | n | m
+cefn | back | n | m
+braich | arm | n | f
+llaw | hand | n | f | plural: dwylo
+bys | finger | n | m
+bola | belly | n | m | South
+coes | leg | n | f
+pen-glin | knee | n | m
+troed | foot | n | f | plural: traed
+tost | ill | adj | | South; also: sâl
+pen tost | headache | n | m | South
+gwddf tost | sore throat | n | m | South
+peswch | cough | n | m
+annwyd | a cold | n | m
+moddion | medicine | n | m | South
+meddygfa | doctor's surgery | n | f
+fferyllfa | pharmacy | n | f
+beth sy'n bod? | what's the matter? | phrase
+gwella | to get better / to improve | v
+
+@theme Home
+cegin | kitchen | n | f
+ystafell | room | n | f
+ystafell wely | bedroom | n | f
+ystafell ymolchi | bathroom | n | f
+lolfa | lounge | n | f
+lan llofft | upstairs | adv | | South
+lawr llawr | downstairs | adv
+drws | door | n | m
+ffenest | window | n | f
+gwely | bed | n | m
+cadair | chair | n | f
+bwrdd | table | n | m
+drws nesa | next door | adv
+
+@theme Clothes
+dillad | clothes | n
+crys | shirt | n | m
+trowsus | trousers | n | m
+sgert | skirt | n | f
+siwmper | jumper | n | f
+cot | coat | n | f
+het | hat | n | f
+esgidiau | shoes | n
+sanau | socks | n
+
+@theme Town & shopping
+arian | money | n | m
+newid | change (money) | n | m
+pris | price | n | m
+rhad | cheap | adj
+drud | expensive | adj
+maint | size | n | m
+archfarchnad | supermarket | n | f
+marchnad | market | n | f
+banc | bank | n | m
+llyfrgell | library | n | f
+canol y dref | town centre | n | m
+stryd | street | n | f
+heol | road | n | f | South
+ffordd | way / road | n | f
+pont | bridge | n | f
+i'r chwith | to the left | phrase
+i'r dde | to the right | phrase
+syth ymlaen | straight on | phrase
+ar bwys | near / by | prep | | South
+wrth ymyl | next to | prep
+gyferbyn â | opposite | prep
+
+@theme Work
+swydd | job | n | f
+cwmni | company | n | m
+cyfarfod | meeting | n | m
+rheolwr | manager | n | m
+cydweithiwr | colleague | n | m | plural: cydweithwyr
+cyflog | salary / wages | n | m
+cyfrifiadur | computer | n | m
+ffôn symudol | mobile phone | n | m
+ebost | email | n | m
+
+@theme Feelings
+balch | proud / glad | adj
+siomedig | disappointed | adj
+cyffrous | exciting / excited | adj
+nerfus | nervous | adj
+crac | angry | adj | | South
+wedi drysu | confused | phrase
+wedi blino'n lân | exhausted | phrase
+ofn | fear | n | m | mae ofn arna i = I'm afraid
+hiraeth | longing (for home) | n | m
+
+@theme Nature
+coeden | tree | n | f | plural: coed
+blodau | flowers | n | | singular: blodyn
+anifail | animal | n | m | plural: anifeiliaid
+aderyn | bird | n | m | plural: adar
+cae | field | n | m
+fferm | farm | n | f
+cefn gwlad | countryside | n | m
+tywod | sand | n | m
+awyr | sky / air | n | f
+
+@theme When & how often
+fel arfer | usually | adv
+weithiau | sometimes | adv
+yn aml | often | adv
+bob amser | always | adv
+byth | never (present/future) | adv | | dw i byth yn… = I never…
+erioed | ever / never (past) | adv | | dw i erioed wedi… = I've never…
+ar hyn o bryd | at the moment | adv
+erbyn hyn | by now | adv
+yn barod | already / ready | adv
+eto | again / yet | adv
+wedyn | afterwards / then | adv
+cyn bo hir | soon | adv
+yn gynnar | early | adv
+yn hwyr | late | adv
+neithiwr | last night | adv
+echdoe | the day before yesterday | adv
+llynedd | last year | adv | | y llynedd
+wythnos diwethaf | last week | adv
+wythnos nesa | next week | adv
+ers | since / for (time) | prep | | ers pryd? = since when?
+plentyndod | childhood | n | m
+pan o'n i'n blentyn | when I was a child | phrase
+
+@theme Linking words
+achos | because | conj
+felly | so / therefore | conj
+ond | but | conj
+neu | or | conj
+hefyd | also | adv
+chwaith | either / neither | adv
+os | if | conj
+pan | when (not a question) | conj
+cyn | before | prep
+ar ôl | after | prep
+er mwyn | in order to | prep
+tra | while | conj
+efallai | perhaps | adv
+wrth gwrs | of course | adv
+yn anffodus | unfortunately | adv
+yn sydyn | suddenly | adv
+
+@theme How much
+tua | about / approximately | adv
+bron | almost | adv
+digon | enough | adv
+gormod | too much | adv
+rhy | too | adv | | + soft mutation: rhy fach
+eithaf | quite | adv
+hollol | completely | adv
+
+@theme Comparing
+gwell | better | adj
+gwaeth | worse | adj
+gorau | best | adj
+gwaetha | worst | adj
+mwy | more / bigger | adj
+llai | less / smaller | adj
+
+@theme Social phrases
+llongyfarchiadau | congratulations | phrase
+pen-blwydd hapus | happy birthday | phrase
+iechyd da | cheers | phrase
+pob lwc | good luck | phrase
+dim problem | no problem | phrase
+dim ots | it doesn't matter | phrase
+paid â phoeni | don't worry | phrase | | â + aspirate mutation (poeni → phoeni)
+wela i di | see you | phrase
