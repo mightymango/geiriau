@@ -28,7 +28,7 @@ class Home extends NativeComponent
 
     public function practise(): void
     {
-        $this->exitToWeb('/study');
+        $this->replace('/study');
     }
 
     public function learnMore(StudyPlanner $planner): void

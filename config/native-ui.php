@@ -101,6 +101,14 @@ return [
             'on-accent' => '#FFFFFF',
             'feminine' => '#E11D48',
             'masculine' => '#0284C7',
+            'again' => '#E11D48',
+            'on-again' => '#FFFFFF',
+            'hard' => '#D97706',
+            'on-hard' => '#FFFFFF',
+            'good' => '#059669',
+            'on-good' => '#FFFFFF',
+            'easy' => '#0284C7',
+            'on-easy' => '#FFFFFF',
         ],
 
         'dark' => [
@@ -133,6 +141,14 @@ return [
             'on-accent' => '#1C1917',
             'feminine' => '#FB7185',
             'masculine' => '#38BDF8',
+            'again' => '#E11D48',
+            'on-again' => '#FFFFFF',
+            'hard' => '#D97706',
+            'on-hard' => '#FFFFFF',
+            'good' => '#059669',
+            'on-good' => '#FFFFFF',
+            'easy' => '#0284C7',
+            'on-easy' => '#FFFFFF',
         ],
 
         // Corner radii (points / dp).

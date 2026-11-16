@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Card;
 use App\Services\Reminders\DailyReminders;
 use App\Services\StudyPlanner;
+use App\Srs\AnswerChecker;
 use App\Srs\Grade;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -32,7 +33,7 @@ class Study extends Component
     {
         $card = $this->card();
         if ($card && $card->direction === Card::PRODUCE && trim($this->attempt) !== '') {
-            $this->verdict = $this->check($this->attempt, $card->word->cy);
+            $this->verdict = (new AnswerChecker)->check($this->attempt, $card->word->cy);
         }
         $this->revealed = true;
     }
@@ -72,28 +73,6 @@ class Study extends Component
     private function card(): ?Card
     {
         return $this->cardId ? Card::with('word')->find($this->cardId) : null;
-    }
-
-    /** Typed answers: exact match, or "close" when only accents/case/punctuation differ. */
-    private function check(string $typed, string $answer): string
-    {
-        $norm = fn (string $s) => preg_replace('/[^\p{L}\p{N} ]/u', '', mb_strtolower(trim($s)));
-        $strip = fn (string $s) => strtr($s, [
-            'â' => 'a', 'ê' => 'e', 'î' => 'i', 'ô' => 'o', 'û' => 'u', 'ŵ' => 'w', 'ŷ' => 'y',
-            'ä' => 'a', 'ë' => 'e', 'ï' => 'i', 'ö' => 'o', 'ü' => 'u', 'á' => 'a', 'é' => 'e', 'à' => 'a', 'è' => 'e',
-        ]);
-
-        // Accept any one of the alternatives separated by "/" (e.g. "eisiau / moyn").
-        foreach (array_map('trim', explode('/', $answer)) as $option) {
-            if ($norm($typed) === $norm($option)) {
-                return 'exact';
-            }
-            if ($strip($norm($typed)) === $strip($norm($option))) {
-                return 'close';
-            }
-        }
-
-        return 'wrong';
     }
 
     public function render(StudyPlanner $planner)

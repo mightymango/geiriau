@@ -65,7 +65,7 @@ it('starts practice when cards are due', function () {
 
     Native::test(Home::class)
         ->tap('Dechrau ymarfer · 5')
-        ->assertExitedToWeb('/study');
+        ->assertReplacedWith('/study');
 });
 
 it('offers more words once everything is done', function () {

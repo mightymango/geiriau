@@ -37,7 +37,7 @@ it('offers practice after the last word', function () {
         ->set('index', 4)
         ->assertDontSee('Nesaf')
         ->tap('Practise now')
-        ->assertExitedToWeb('/study');
+        ->assertReplacedWith('/study');
 });
 
 it('starts at the first word not yet seen', function () {
