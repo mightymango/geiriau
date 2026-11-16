@@ -3,6 +3,7 @@
 namespace App\NativeComponents;
 
 use App\Services\StudyPlanner;
+use Geiriau\Haptics\Facades\Haptics;
 use Illuminate\View\View;
 use Native\Mobile\Edge\NativeComponent;
 
@@ -24,11 +25,15 @@ class Learn extends NativeComponent
         $lastIndex = app(StudyPlanner::class)->todaysNewWords()->count() - 1;
 
         $this->index = min($this->index + 1, $lastIndex);
+
+        Haptics::selection();
     }
 
     public function previous(): void
     {
         $this->index = max(0, $this->index - 1);
+
+        Haptics::selection();
     }
 
     public function practise(): void

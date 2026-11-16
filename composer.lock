@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72ab8f8ea0b00f030ff9d44e56b0bb31",
+    "content-hash": "eec32ebc5440d0cc1203676d38ceb5be",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -817,6 +817,43 @@
             ],
             "time": "2025-12-03T09:33:47+00:00",
             "published-time": "2025-12-03T09:37:01+00:00"
+        },
+        {
+            "name": "geiriau/haptics",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "packages/haptics",
+                "reference": "0fffc03a13a49b7fc58f06e744aed942ebf4896d"
+            },
+            "require": {
+                "nativephp/mobile": "^4.0",
+                "php": "^8.3"
+            },
+            "type": "nativephp-plugin",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Geiriau\\Haptics\\HapticsServiceProvider"
+                    ]
+                },
+                "nativephp": {
+                    "manifest": "nativephp.json"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Geiriau\\Haptics\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Light, native haptic feedback (impact, success/warning/error, selection) for NativePHP Mobile.",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "graham-campbell/result-type",
@@ -11150,7 +11187,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "geiriau/haptics": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -7,6 +7,7 @@ use App\Services\Reminders\DailyReminders;
 use App\Services\StudyPlanner;
 use App\Srs\AnswerChecker;
 use App\Srs\Grade;
+use Geiriau\Haptics\Facades\Haptics;
 use Illuminate\View\View;
 use Native\Mobile\Edge\NativeComponent;
 
@@ -41,6 +42,12 @@ class Study extends NativeComponent
 
         if ($card->direction === Card::PRODUCE && trim($this->attempt) !== '') {
             $this->verdict = (new AnswerChecker)->check($this->attempt, $card->word->cy);
+
+            match ($this->verdict) {
+                'exact' => Haptics::success(),
+                'close' => Haptics::warning(),
+                'wrong' => Haptics::error(),
+            };
         }
 
         $this->revealed = true;
@@ -62,9 +69,14 @@ class Study extends NativeComponent
         $this->doneThisSession++;
         $this->loadNext($planner);
 
-        if ($this->cardId === null) {
-            $reminders->sync();
+        if ($this->cardId !== null) {
+            Haptics::impact();
+
+            return;
         }
+
+        Haptics::success();
+        $reminders->sync();
     }
 
     public function learnMore(StudyPlanner $planner): void

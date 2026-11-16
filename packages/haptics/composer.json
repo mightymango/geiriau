@@ -1,0 +1,26 @@
+{
+    "name": "geiriau/haptics",
+    "description": "Light, native haptic feedback (impact, success/warning/error, selection) for NativePHP Mobile.",
+    "version": "1.0.0",
+    "type": "nativephp-plugin",
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "nativephp/mobile": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Geiriau\\Haptics\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Geiriau\\Haptics\\HapticsServiceProvider"
+            ]
+        },
+        "nativephp": {
+            "manifest": "nativephp.json"
+        }
+    }
+}

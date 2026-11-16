@@ -1,0 +1,68 @@
+{
+    "name": "geiriau/haptics",
+    "version": "1.0.0",
+    "description": "Light, native haptic feedback (impact, success/warning/error, selection).",
+    "namespace": "GeiriauHaptics",
+    "category": "utilities",
+    "license": "MIT",
+    "pricing": {
+        "type": "free"
+    },
+    "platforms": [
+        "android",
+        "ios"
+    ],
+    "bridge_functions": [
+        {
+            "name": "GeiriauHaptics.Impact",
+            "android": "com.geiriau.plugins.haptics.GeiriauHapticsFunctions.Impact",
+            "android_params": ["context"],
+            "ios": "GeiriauHapticsFunctions.Impact",
+            "description": "A physical tap: light, medium or heavy"
+        },
+        {
+            "name": "GeiriauHaptics.Notify",
+            "android": "com.geiriau.plugins.haptics.GeiriauHapticsFunctions.Notify",
+            "android_params": ["context"],
+            "ios": "GeiriauHapticsFunctions.Notify",
+            "description": "An outcome: success, warning or error"
+        },
+        {
+            "name": "GeiriauHaptics.Selection",
+            "android": "com.geiriau.plugins.haptics.GeiriauHapticsFunctions.Selection",
+            "android_params": ["context"],
+            "ios": "GeiriauHapticsFunctions.Selection",
+            "description": "A selection changing, such as stepping to the next item"
+        }
+    ],
+    "android": {
+        "min_version": 26,
+        "permissions": [
+            "android.permission.VIBRATE"
+        ],
+        "repositories": [],
+        "dependencies": {
+            "implementation": []
+        },
+        "activities": [],
+        "services": [],
+        "receivers": [],
+        "providers": []
+    },
+    "ios": {
+        "min_version": "15.0",
+        "permissions": [],
+        "repositories": [],
+        "dependencies": {
+            "swift_packages": [],
+            "pods": []
+        }
+    },
+    "assets": {
+        "android": [],
+        "ios": []
+    },
+    "secrets": [],
+    "events": [],
+    "service_provider": "Geiriau\\Haptics\\HapticsServiceProvider"
+}

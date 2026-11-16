@@ -99,3 +99,32 @@ it('is the Ymarfer tab', function () {
         ->assertHasTabBar()
         ->assertTabActive('Ymarfer');
 });
+
+it('taps lightly when you grade a card', function () {
+    Native::test(Study::class)
+        ->tap('Dangos yr ateb')
+        ->tap('Da')
+        ->assertNativeCalled('GeiriauHaptics.Impact');
+});
+
+it('gives feedback for a typed answer', function (string $typed, string $feedback) {
+    produceCardFor('dŵr', 'water');
+
+    Native::test(Study::class)
+        ->set('attempt', $typed)
+        ->tap('Dangos yr ateb')
+        ->assertNativeCalled('GeiriauHaptics.Notify', fn (array $parameters) => $parameters['type'] === $feedback);
+})->with([
+    'exact' => ['dŵr', 'success'],
+    'close' => ['dwr', 'warning'],
+    'wrong' => ['tân', 'error'],
+]);
+
+it('celebrates finishing the session', function () {
+    onlyDueCard(Card::query()->first());
+
+    Native::test(Study::class)
+        ->tap('Dangos yr ateb')
+        ->tap('Da')
+        ->assertNativeCalled('GeiriauHaptics.Notify', fn (array $parameters) => $parameters['type'] === 'success');
+});

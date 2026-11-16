@@ -58,3 +58,9 @@ it('says so when there are no new words today', function () {
     Native::test(Learn::class)
         ->assertSee('No new words today.');
 });
+
+it('ticks as you step through the words', function () {
+    Native::test(Learn::class)
+        ->tap('Nesaf')
+        ->assertNativeCalled('GeiriauHaptics.Selection');
+});
